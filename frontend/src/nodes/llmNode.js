@@ -1,34 +1,29 @@
 // llmNode.js
-
-import { Handle, Position } from 'reactflow';
+import { Brain } from 'lucide-react';
+import { BaseNode } from '../components/BaseNode';
 
 export const LLMNode = ({ id, data }) => {
-
   return (
-    <div style={{width: 200, height: 80, border: '1px solid black'}}>
-      <Handle
-        type="target"
-        position={Position.Left}
-        id={`${id}-system`}
-        style={{top: `${100/3}%`}}
-      />
-      <Handle
-        type="target"
-        position={Position.Left}
-        id={`${id}-prompt`}
-        style={{top: `${200/3}%`}}
-      />
-      <div>
-        <span>LLM</span>
-      </div>
-      <div>
-        <span>This is a LLM.</span>
-      </div>
-      <Handle
-        type="source"
-        position={Position.Right}
-        id={`${id}-response`}
-      />
-    </div>
+    <BaseNode
+      id={id}
+      data={data}
+      title="LLM"
+      description="Large Language Model"
+      icon={Brain}
+      color="purple"
+      inputs={[
+        { id: `${id}-system` },
+        { id: `${id}-prompt` }
+      ]}
+      outputs={[{ id: `${id}-response` }]}
+    >
+      {() => (
+        <div className="text-center py-2">
+          <p className="text-xs text-white/70">
+            Processes natural language using AI
+          </p>
+        </div>
+      )}
+    </BaseNode>
   );
-}
+};

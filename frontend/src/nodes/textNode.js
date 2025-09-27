@@ -1,35 +1,43 @@
 // textNode.js
-
 import { useState } from 'react';
-import { Handle, Position } from 'reactflow';
+import { Type } from 'lucide-react';
+import { BaseNode } from '../components/BaseNode';
+import { useStore } from '../store';
 
 export const TextNode = ({ id, data }) => {
+  const updateNodeField = useStore((state) => state.updateNodeField);
   const [currText, setCurrText] = useState(data?.text || '{{input}}');
 
   const handleTextChange = (e) => {
-    setCurrText(e.target.value);
+    const newText = e.target.value;
+    setCurrText(newText);
+    updateNodeField(id, 'text', newText);
   };
 
   return (
-    <div style={{width: 200, height: 80, border: '1px solid black'}}>
-      <div>
-        <span>Text</span>
-      </div>
-      <div>
-        <label>
-          Text:
-          <input 
-            type="text" 
-            value={currText} 
-            onChange={handleTextChange} 
+    <BaseNode
+      id={id}
+      data={data}
+      title="Text"
+      description="Text processing node"
+      icon={Type}
+      color="blue"
+      outputs={[{ id: `${id}-output` }]}
+    >
+      {() => (
+        <div>
+          <label className="block text-xs font-medium text-white/80 mb-1">
+            Text Content
+          </label>
+          <textarea
+            value={currText}
+            onChange={handleTextChange}
+            className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white text-sm placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+            placeholder="Enter text content"
+            rows={3}
           />
-        </label>
-      </div>
-      <Handle
-        type="source"
-        position={Position.Right}
-        id={`${id}-output`}
-      />
-    </div>
+        </div>
+      )}
+    </BaseNode>
   );
-}
+};

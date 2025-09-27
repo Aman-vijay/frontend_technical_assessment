@@ -1,16 +1,16 @@
 // store.js
-
 import { create } from "zustand";
 import {
     addEdge,
     applyNodeChanges,
     applyEdgeChanges,
     MarkerType,
-  } from 'reactflow';
+} from 'reactflow';
 
 export const useStore = create((set, get) => ({
     nodes: [],
     edges: [],
+    nodeIDs: {},
     getNodeID: (type) => {
         const newIDs = {...get().nodeIDs};
         if (newIDs[type] === undefined) {
@@ -26,29 +26,39 @@ export const useStore = create((set, get) => ({
         });
     },
     onNodesChange: (changes) => {
-      set({
-        nodes: applyNodeChanges(changes, get().nodes),
-      });
+        set({
+            nodes: applyNodeChanges(changes, get().nodes),
+        });
     },
     onEdgesChange: (changes) => {
-      set({
-        edges: applyEdgeChanges(changes, get().edges),
-      });
+        set({
+            edges: applyEdgeChanges(changes, get().edges),
+        });
     },
     onConnect: (connection) => {
-      set({
-        edges: addEdge({...connection, type: 'smoothstep', animated: true, markerEnd: {type: MarkerType.Arrow, height: '20px', width: '20px'}}, get().edges),
-      });
+        set({
+            edges: addEdge({
+                ...connection, 
+                type: 'smoothstep', 
+                animated: true, 
+                style: { stroke: '#667eea', strokeWidth: 2 },
+                markerEnd: {
+                    type: MarkerType.Arrow, 
+                    height: '20px', 
+                    width: '20px',
+                    color: '#667eea'
+                }
+            }, get().edges),
+        });
     },
     updateNodeField: (nodeId, fieldName, fieldValue) => {
-      set({
-        nodes: get().nodes.map((node) => {
-          if (node.id === nodeId) {
-            node.data = { ...node.data, [fieldName]: fieldValue };
-          }
-  
-          return node;
-        }),
-      });
+        set({
+            nodes: get().nodes.map((node) => {
+                if (node.id === nodeId) {
+                    node.data = { ...node.data, [fieldName]: fieldValue };
+                }
+                return node;
+            }),
+        });
     },
-  }));
+}));
