@@ -4,9 +4,18 @@ import { SubmitButton } from './submit';
 
 function App() {
   return (
-    <div className="h-screen w-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex overflow-hidden">
+    <div style={{
+      height: '100vh',
+      width: '100vw',
+      background: 'linear-gradient(to bottom right, #111827, #1f2937, #111827)',
+      display: 'flex',
+      overflow: 'hidden'
+    }}>
       <PipelineToolbar />
-      <div className="flex-1 relative">
+      <div style={{
+        flex: 1,
+        position: 'relative'
+      }}>
         <PipelineUI />
         <SubmitButton />
       </div>

@@ -2,16 +2,10 @@
 import { useState, useRef, useCallback } from 'react';
 import ReactFlow, { Controls, Background, MiniMap } from 'reactflow';
 import { useStore } from './store';
-import { shallow } from 'zustand/shallow';
 import { InputNode } from './nodes/inputNode';
 import { LLMNode } from './nodes/llmNode';
 import { OutputNode } from './nodes/outputNode';
 import { TextNode } from './nodes/textNode';
-import { ApiNode } from './nodes/apiNode';
-import { DatabaseNode } from './nodes/databaseNode';
-import { TransformNode } from './nodes/transformNode';
-import { FilterNode } from './nodes/filterNode';
-import { AggregateNode } from './nodes/aggregateNode';
 
 import 'reactflow/dist/style.css';
 
@@ -22,35 +16,22 @@ const nodeTypes = {
   llm: LLMNode,
   customOutput: OutputNode,
   text: TextNode,
-  api: ApiNode,
-  database: DatabaseNode,
-  transform: TransformNode,
-  filter: FilterNode,
-  aggregate: AggregateNode,
 };
 
-const selector = (state) => ({
-  nodes: state.nodes,
-  edges: state.edges,
-  getNodeID: state.getNodeID,
-  addNode: state.addNode,
-  onNodesChange: state.onNodesChange,
-  onEdgesChange: state.onEdgesChange,
-  onConnect: state.onConnect,
-});
+// Individual selectors prevent reference issues that cause infinite loops
 
 export const PipelineUI = () => {
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
-  const {
-    nodes,
-    edges,
-    getNodeID,
-    addNode,
-    onNodesChange,
-    onEdgesChange,
-    onConnect
-  } = useStore(selector, shallow);
+  
+  // Use individual selectors to avoid reference issues
+  const nodes = useStore((state) => state.nodes);
+  const edges = useStore((state) => state.edges);
+  const getNodeID = useStore((state) => state.getNodeID);
+  const addNode = useStore((state) => state.addNode);
+  const onNodesChange = useStore((state) => state.onNodesChange);
+  const onEdgesChange = useStore((state) => state.onEdgesChange);
+  const onConnect = useStore((state) => state.onConnect);
 
   const getInitNodeData = (nodeID, type) => {
     let nodeData = { id: nodeID, nodeType: `${type}` };
@@ -95,8 +76,11 @@ export const PipelineUI = () => {
   }, []);
 
   return (
-    <div className="flex-1 h-full relative">
-      <div ref={reactFlowWrapper} className="w-full h-full">
+    <div style={{ flex: 1, height: '100%', position: 'relative' }}>
+      <div 
+        ref={reactFlowWrapper} 
+        style={{ width: '100%', height: '100%', minHeight: '500px' }}
+      >
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -110,22 +94,29 @@ export const PipelineUI = () => {
           proOptions={proOptions}
           snapGrid={[gridSize, gridSize]}
           connectionLineType="smoothstep"
-          className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
+          style={{
+            background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%)'
+          }}
         >
           <Background 
             color="#374151" 
             gap={gridSize} 
             size={1}
-            className="opacity-50"
           />
           <Controls 
-            className="bg-gray-800/80 border-gray-600"
             showInteractive={false}
+            style={{
+              background: 'rgba(26, 26, 46, 0.8)',
+              border: '1px solid rgba(102, 126, 234, 0.3)'
+            }}
           />
           <MiniMap 
-            className="bg-gray-800/80 border-gray-600"
             nodeColor="#667eea"
             maskColor="rgba(0, 0, 0, 0.2)"
+            style={{
+              background: 'rgba(26, 26, 46, 0.8)',
+              border: '1px solid rgba(102, 126, 234, 0.3)'
+            }}
           />
         </ReactFlow>
       </div>

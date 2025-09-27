@@ -1,65 +1,77 @@
 // outputNode.js
 import { useState } from 'react';
-import { Download, Image } from 'lucide-react';
-import { BaseNode } from '../components/BaseNode';
-import { useStore } from '../store';
+import { Handle, Position } from 'reactflow';
 
 export const OutputNode = ({ id, data }) => {
-  const updateNodeField = useStore((state) => state.updateNodeField);
   const [currName, setCurrName] = useState(data?.outputName || id.replace('customOutput-', 'output_'));
   const [outputType, setOutputType] = useState(data.outputType || 'Text');
 
   const handleNameChange = (e) => {
-    const newName = e.target.value;
-    setCurrName(newName);
-    updateNodeField(id, 'outputName', newName);
+    setCurrName(e.target.value);
   };
 
   const handleTypeChange = (e) => {
-    const newType = e.target.value;
-    setOutputType(newType);
-    updateNodeField(id, 'outputType', newType);
+    setOutputType(e.target.value);
   };
 
   return (
-    <BaseNode
-      id={id}
-      data={data}
-      title="Output"
-      description="Data output node"
-      icon={outputType === 'Image' ? Image : Download}
-      color="orange"
-      inputs={[{ id: `${id}-value` }]}
-    >
-      {() => (
-        <div className="space-y-3">
-          <div>
-            <label className="block text-xs font-medium text-white/80 mb-1">
-              Name
-            </label>
-            <input
-              type="text"
-              value={currName}
+    <div style={{width: 200, height: 120, border: '1px solid #f59e0b', borderRadius: '8px', background: '#1a1a2e', padding: '8px'}}>
+      <Handle
+        type="target"
+        position={Position.Left}
+        id={`${id}-value`}
+        style={{
+          background: '#f59e0b',
+          border: '2px solid #1a1a2e'
+        }}
+      />
+      <div style={{color: 'white', fontSize: '14px', fontWeight: 'bold', marginBottom: '8px'}}>
+        Output
+      </div>
+      <div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
+        <div>
+          <label style={{color: 'white', fontSize: '12px'}}>
+            Name:
+            <input 
+              type="text" 
+              value={currName} 
               onChange={handleNameChange}
-              className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white text-sm placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="Enter output name"
+              style={{
+                width: '100%',
+                marginTop: '2px',
+                padding: '4px',
+                borderRadius: '4px',
+                border: '1px solid #f59e0b',
+                background: '#2a2a3e',
+                color: 'white',
+                fontSize: '12px'
+              }}
             />
-          </div>
-          <div>
-            <label className="block text-xs font-medium text-white/80 mb-1">
-              Type
-            </label>
-            <select
-              value={outputType}
-              onChange={handleTypeChange}
-              className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              <option value="Text" className="bg-gray-800">Text</option>
-              <option value="Image" className="bg-gray-800">Image</option>
-            </select>
-          </div>
+          </label>
         </div>
-      )}
-    </BaseNode>
+        <div>
+          <label style={{color: 'white', fontSize: '12px'}}>
+            Type:
+            <select 
+              value={outputType} 
+              onChange={handleTypeChange}
+              style={{
+                width: '100%',
+                marginTop: '2px',
+                padding: '4px',
+                borderRadius: '4px',
+                border: '1px solid #f59e0b',
+                background: '#2a2a3e',
+                color: 'white',
+                fontSize: '12px'
+              }}
+            >
+              <option value="Text">Text</option>
+              <option value="Image">Image</option>
+            </select>
+          </label>
+        </div>
+      </div>
+    </div>
   );
 };

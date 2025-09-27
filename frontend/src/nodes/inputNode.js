@@ -1,65 +1,76 @@
 // inputNode.js
 import { useState } from 'react';
-import { Upload, Type } from 'lucide-react';
-import { BaseNode } from '../components/BaseNode';
-import { useStore } from '../store';
+import { Handle, Position } from 'reactflow';
 
 export const InputNode = ({ id, data }) => {
-  const updateNodeField = useStore((state) => state.updateNodeField);
   const [currName, setCurrName] = useState(data?.inputName || id.replace('customInput-', 'input_'));
   const [inputType, setInputType] = useState(data.inputType || 'Text');
 
   const handleNameChange = (e) => {
-    const newName = e.target.value;
-    setCurrName(newName);
-    updateNodeField(id, 'inputName', newName);
+    setCurrName(e.target.value);
   };
 
   const handleTypeChange = (e) => {
-    const newType = e.target.value;
-    setInputType(newType);
-    updateNodeField(id, 'inputType', newType);
+    setInputType(e.target.value);
   };
 
   return (
-    <BaseNode
-      id={id}
-      data={data}
-      title="Input"
-      description="Data input node"
-      icon={inputType === 'File' ? Upload : Type}
-      color="green"
-      outputs={[{ id: `${id}-value` }]}
-    >
-      {() => (
-        <div className="space-y-3">
-          <div>
-            <label className="block text-xs font-medium text-white/80 mb-1">
-              Name
-            </label>
-            <input
-              type="text"
-              value={currName}
+    <div style={{width: 200, height: 120, border: '1px solid #10b981', borderRadius: '8px', background: '#1a1a2e', padding: '8px'}}>
+      <div style={{color: 'white', fontSize: '14px', fontWeight: 'bold', marginBottom: '8px'}}>
+        Input
+      </div>
+      <div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
+        <div>
+          <label style={{color: 'white', fontSize: '12px'}}>
+            Name:
+            <input 
+              type="text" 
+              value={currName} 
               onChange={handleNameChange}
-              className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white text-sm placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="Enter input name"
+              style={{
+                width: '100%',
+                marginTop: '2px',
+                padding: '4px',
+                borderRadius: '4px',
+                border: '1px solid #10b981',
+                background: '#2a2a3e',
+                color: 'white',
+                fontSize: '12px'
+              }}
             />
-          </div>
-          <div>
-            <label className="block text-xs font-medium text-white/80 mb-1">
-              Type
-            </label>
-            <select
-              value={inputType}
-              onChange={handleTypeChange}
-              className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              <option value="Text" className="bg-gray-800">Text</option>
-              <option value="File" className="bg-gray-800">File</option>
-            </select>
-          </div>
+          </label>
         </div>
-      )}
-    </BaseNode>
+        <div>
+          <label style={{color: 'white', fontSize: '12px'}}>
+            <select 
+              value={inputType} 
+              onChange={handleTypeChange}
+              style={{
+                width: '100%',
+                marginTop: '2px',
+                padding: '4px',
+                borderRadius: '4px',
+                border: '1px solid #10b981',
+                background: '#2a2a3e',
+                color: 'white',
+                fontSize: '12px'
+              }}
+            >
+              <option value="Text">Text</option>
+              <option value="File">File</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <Handle
+        type="source"
+        position={Position.Right}
+        id={`${id}-value`}
+        style={{
+          background: '#10b981',
+          border: '2px solid #1a1a2e'
+        }}
+      />
+    </div>
   );
 };

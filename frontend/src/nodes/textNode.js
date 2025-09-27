@@ -1,43 +1,50 @@
 // textNode.js
 import { useState } from 'react';
-import { Type } from 'lucide-react';
-import { BaseNode } from '../components/BaseNode';
-import { useStore } from '../store';
+import { Handle, Position } from 'reactflow';
 
 export const TextNode = ({ id, data }) => {
-  const updateNodeField = useStore((state) => state.updateNodeField);
   const [currText, setCurrText] = useState(data?.text || '{{input}}');
 
   const handleTextChange = (e) => {
-    const newText = e.target.value;
-    setCurrText(newText);
-    updateNodeField(id, 'text', newText);
+    setCurrText(e.target.value);
   };
 
   return (
-    <BaseNode
-      id={id}
-      data={data}
-      title="Text"
-      description="Text processing node"
-      icon={Type}
-      color="blue"
-      outputs={[{ id: `${id}-output` }]}
-    >
-      {() => (
-        <div>
-          <label className="block text-xs font-medium text-white/80 mb-1">
-            Text Content
-          </label>
-          <textarea
-            value={currText}
+    <div style={{width: 200, height: 120, border: '1px solid #667eea', borderRadius: '8px', background: '#1a1a2e', padding: '8px'}}>
+      <div style={{color: 'white', fontSize: '14px', fontWeight: 'bold', marginBottom: '8px'}}>
+        Text
+      </div>
+      <div>
+        <label style={{color: 'white', fontSize: '12px'}}>
+          Text:
+          <textarea 
+            value={currText} 
             onChange={handleTextChange}
-            className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white text-sm placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+            style={{
+              width: '100%',
+              height: '60px',
+              marginTop: '4px',
+              padding: '4px',
+              borderRadius: '4px',
+              border: '1px solid #667eea',
+              background: '#2a2a3e',
+              color: 'white',
+              fontSize: '12px',
+              resize: 'none'
+            }}
             placeholder="Enter text content"
-            rows={3}
           />
-        </div>
-      )}
-    </BaseNode>
+        </label>
+      </div>
+      <Handle
+        type="source"
+        position={Position.Right}
+        id={`${id}-output`}
+        style={{
+          background: '#667eea',
+          border: '2px solid #1a1a2e'
+        }}
+      />
+    </div>
   );
 };

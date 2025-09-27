@@ -1,29 +1,46 @@
 // llmNode.js
-import { Brain } from 'lucide-react';
-import { BaseNode } from '../components/BaseNode';
+import { Handle, Position } from 'reactflow';
 
 export const LLMNode = ({ id, data }) => {
   return (
-    <BaseNode
-      id={id}
-      data={data}
-      title="LLM"
-      description="Large Language Model"
-      icon={Brain}
-      color="purple"
-      inputs={[
-        { id: `${id}-system` },
-        { id: `${id}-prompt` }
-      ]}
-      outputs={[{ id: `${id}-response` }]}
-    >
-      {() => (
-        <div className="text-center py-2">
-          <p className="text-xs text-white/70">
-            Processes natural language using AI
-          </p>
+    <div style={{width: 200, height: 100, border: '1px solid #8b5cf6', borderRadius: '8px', background: '#1a1a2e', padding: '8px'}}>
+      <Handle
+        type="target"
+        position={Position.Left}
+        id={`${id}-system`}
+        style={{
+          top: '33%',
+          background: '#8b5cf6',
+          border: '2px solid #1a1a2e'
+        }}
+      />
+      <Handle
+        type="target"
+        position={Position.Left}
+        id={`${id}-prompt`}
+        style={{
+          top: '67%',
+          background: '#8b5cf6',
+          border: '2px solid #1a1a2e'
+        }}
+      />
+      <div style={{color: 'white', fontSize: '14px', fontWeight: 'bold', marginBottom: '8px', textAlign: 'center'}}>
+        LLM
+      </div>
+      <div style={{textAlign: 'center'}}>
+        <div style={{color: 'white', fontSize: '11px', opacity: 0.7}}>
+          AI Language Model
         </div>
-      )}
-    </BaseNode>
+      </div>
+      <Handle
+        type="source"
+        position={Position.Right}
+        id={`${id}-response`}
+        style={{
+          background: '#8b5cf6',
+          border: '2px solid #1a1a2e'
+        }}
+      />
+    </div>
   );
 };
