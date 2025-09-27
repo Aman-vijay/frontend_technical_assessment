@@ -1,6 +1,6 @@
 // filterNode.js - New node demonstrating abstraction
 import { useState } from 'react';
-import { Filter } from 'lucide-react';
+import { ListFilter as Filter } from 'lucide-react';
 import { BaseNode } from '../components/BaseNode';
 import { useStore } from '../store';
 

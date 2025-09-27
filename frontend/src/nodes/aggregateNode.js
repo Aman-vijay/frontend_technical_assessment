@@ -1,6 +1,6 @@
 // aggregateNode.js - New node demonstrating abstraction
 import { useState } from 'react';
-import { BarChart3 } from 'lucide-react';
+import { ChartBar as BarChart3 } from 'lucide-react';
 import { BaseNode } from '../components/BaseNode';
 import { useStore } from '../store';
 
