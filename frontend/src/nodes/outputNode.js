@@ -1,4 +1,3 @@
-// outputNode.js
 import { useState } from 'react';
 import { ArrowUpFromLine } from 'lucide-react';
 import { BaseNode } from '../components/BaseNode';
@@ -6,6 +5,7 @@ import { useStore } from '../store';
 
 export const OutputNode = ({ id, data }) => {
   const updateNodeField = useStore((state) => state.updateNodeField);
+  const deleteNode = useStore((state) => state.deleteNode);
   const [currName, setCurrName] = useState(data?.outputName || id.replace('customOutput-', 'output_'));
   const [outputType, setOutputType] = useState(data?.outputType || 'Text');
 
@@ -31,6 +31,7 @@ export const OutputNode = ({ id, data }) => {
       color="orange"
       inputs={[{ id: `${id}-value` }]}
       outputs={[]}
+      onDelete={deleteNode}
     >
       {() => (
         <div className="space-y-3">
