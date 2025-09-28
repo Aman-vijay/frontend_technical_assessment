@@ -15,11 +15,11 @@ export const InputNode = ({ id, data }) => {
   };
 
   return (
-    <div style={{width: 200, height: 120, border: '1px solid #10b981', borderRadius: '8px', background: '#1a1a2e', padding: '8px'}}>
-      <div style={{color: 'white', fontSize: '14px', fontWeight: 'bold', marginBottom: '8px'}}>
+    <div className="w-[200px] h-[120px] border border-emerald-500 rounded-lg bg-[#1a1a2e] p-2">
+      <div className="text-white text-sm font-bold mb-2">
         Input
       </div>
-      <div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
+      <div className="flex flex-col gap-2">
         <div>
           <label style={{color: 'white', fontSize: '12px'}}>
             Name:
@@ -27,34 +27,16 @@ export const InputNode = ({ id, data }) => {
               type="text" 
               value={currName} 
               onChange={handleNameChange}
-              style={{
-                width: '100%',
-                marginTop: '2px',
-                padding: '4px',
-                borderRadius: '4px',
-                border: '1px solid #10b981',
-                background: '#2a2a3e',
-                color: 'white',
-                fontSize: '12px'
-              }}
+              className="w-full mt-0.5 p-1 rounded border border-emerald-500 bg-[#2a2a3e] text-white text-xs"
             />
           </label>
         </div>
         <div>
-          <label style={{color: 'white', fontSize: '12px'}}>
+          <label className="text-white text-xs">
             <select 
               value={inputType} 
               onChange={handleTypeChange}
-              style={{
-                width: '100%',
-                marginTop: '2px',
-                padding: '4px',
-                borderRadius: '4px',
-                border: '1px solid #10b981',
-                background: '#2a2a3e',
-                color: 'white',
-                fontSize: '12px'
-              }}
+              className="w-full mt-0.5 p-1 rounded border border-emerald-500 bg-[#2a2a3e] text-white text-xs"
             >
               <option value="Text">Text</option>
               <option value="File">File</option>
@@ -66,10 +48,7 @@ export const InputNode = ({ id, data }) => {
         type="source"
         position={Position.Right}
         id={`${id}-value`}
-        style={{
-          background: '#10b981',
-          border: '2px solid #1a1a2e'
-        }}
+        className="bg-emerald-500 border-2 border-[#1a1a2e]"
       />
     </div>
   );

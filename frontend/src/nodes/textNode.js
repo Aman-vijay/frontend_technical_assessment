@@ -10,28 +10,17 @@ export const TextNode = ({ id, data }) => {
   };
 
   return (
-    <div style={{width: 200, height: 120, border: '1px solid #667eea', borderRadius: '8px', background: '#1a1a2e', padding: '8px'}}>
-      <div style={{color: 'white', fontSize: '14px', fontWeight: 'bold', marginBottom: '8px'}}>
+    <div className="w-[200px] h-[140px] border border-[#667eea] rounded-lg bg-[#1a1a2e] p-2">
+      <div className="text-white text-sm font-bold mb-2">
         Text
       </div>
       <div>
-        <label style={{color: 'white', fontSize: '12px'}}>
+        <label className="text-white text-xs">
           Text:
           <textarea 
             value={currText} 
             onChange={handleTextChange}
-            style={{
-              width: '100%',
-              height: '60px',
-              marginTop: '4px',
-              padding: '4px',
-              borderRadius: '4px',
-              border: '1px solid #667eea',
-              background: '#2a2a3e',
-              color: 'white',
-              fontSize: '12px',
-              resize: 'none'
-            }}
+            className="w-full h-[60px] mt-1 p-1 rounded border border-[#667eea] bg-[#2a2a3e] text-white text-xs resize-none"
             placeholder="Enter text content"
           />
         </label>
@@ -40,10 +29,7 @@ export const TextNode = ({ id, data }) => {
         type="source"
         position={Position.Right}
         id={`${id}-output`}
-        style={{
-          background: '#667eea',
-          border: '2px solid #1a1a2e'
-        }}
+        className="bg-[#667eea] border-2 border-[#1a1a2e]"
       />
     </div>
   );

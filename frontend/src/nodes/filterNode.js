@@ -38,7 +38,7 @@ export const FilterNode = ({ id, data }) => {
       {() => (
         <div className="space-y-3">
           <div>
-            <label className="block text-xs font-medium text-white/80 mb-1">
+            <label className="block text-xs font-medium  mb-1">
               Condition
             </label>
             <select

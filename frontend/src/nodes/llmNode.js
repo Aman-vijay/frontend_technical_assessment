@@ -3,32 +3,24 @@ import { Handle, Position } from 'reactflow';
 
 export const LLMNode = ({ id, data }) => {
   return (
-    <div style={{width: 200, height: 100, border: '1px solid #8b5cf6', borderRadius: '8px', background: '#1a1a2e', padding: '8px'}}>
+    <div className="w-[200px] h-[100px] border border-violet-500 rounded-lg bg-[#1a1a2e] p-2">
       <Handle
         type="target"
         position={Position.Left}
         id={`${id}-system`}
-        style={{
-          top: '33%',
-          background: '#8b5cf6',
-          border: '2px solid #1a1a2e'
-        }}
+        className="top-[33%] bg-violet-500 border-2 border-[#1a1a2e]"
       />
       <Handle
         type="target"
         position={Position.Left}
         id={`${id}-prompt`}
-        style={{
-          top: '67%',
-          background: '#8b5cf6',
-          border: '2px solid #1a1a2e'
-        }}
+        className="top-[67%] bg-violet-500 border-2 border-[#1a1a2e]"
       />
-      <div style={{color: 'white', fontSize: '14px', fontWeight: 'bold', marginBottom: '8px', textAlign: 'center'}}>
+      <div className="text-white text-sm font-bold mb-2 text-center">
         LLM
       </div>
-      <div style={{textAlign: 'center'}}>
-        <div style={{color: 'white', fontSize: '11px', opacity: 0.7}}>
+      <div className="text-center">
+        <div className="text-white text-[11px] opacity-70">
           AI Language Model
         </div>
       </div>
@@ -36,10 +28,7 @@ export const LLMNode = ({ id, data }) => {
         type="source"
         position={Position.Right}
         id={`${id}-response`}
-        style={{
-          background: '#8b5cf6',
-          border: '2px solid #1a1a2e'
-        }}
+        className="bg-violet-500 border-2 border-[#1a1a2e]"
       />
     </div>
   );

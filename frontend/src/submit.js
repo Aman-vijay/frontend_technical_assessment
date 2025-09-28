@@ -38,40 +38,12 @@ ${data.is_dag ? '✅ Your pipeline is valid!' : '❌ Your pipeline contains cycl
   };
 
   return (
-    <div style={{
-      position: 'absolute',
-      bottom: '24px',
-      right: '24px',
-      zIndex: 10
-    }}>
+    <div className="absolute bottom-6 right-6 z-10">
       <button
         onClick={handleSubmit}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '12px',
-          padding: '12px 24px',
-          background: 'linear-gradient(to right, #2563eb, #9333ea)',
-          color: 'white',
-          fontWeight: '600',
-          borderRadius: '8px',
-          border: 'none',
-          boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-          cursor: 'pointer',
-          transition: 'all 0.2s ease',
-        }}
-        onMouseEnter={(e) => {
-          e.target.style.background = 'linear-gradient(to right, #1d4ed8, #7c3aed)';
-          e.target.style.transform = 'scale(1.05)';
-          e.target.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
-        }}
-        onMouseLeave={(e) => {
-          e.target.style.background = 'linear-gradient(to right, #2563eb, #9333ea)';
-          e.target.style.transform = 'scale(1)';
-          e.target.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
-        }}
+        className="group flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
       >
-        <Play style={{ width: '20px', height: '20px' }} />
+        <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
         Run Pipeline
       </button>
     </div>

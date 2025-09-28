@@ -6,6 +6,12 @@ import { InputNode } from './nodes/inputNode';
 import { LLMNode } from './nodes/llmNode';
 import { OutputNode } from './nodes/outputNode';
 import { TextNode } from './nodes/textNode';
+// Import the new nodes
+import { TransformNode } from './nodes/transformNode';
+import { FilterNode } from './nodes/filterNode';
+import { AggregateNode } from './nodes/aggregateNode';
+import { ApiNode } from './nodes/apiNode';
+import { DatabaseNode } from './nodes/databaseNode';
 
 import 'reactflow/dist/style.css';
 
@@ -16,6 +22,12 @@ const nodeTypes = {
   llm: LLMNode,
   customOutput: OutputNode,
   text: TextNode,
+  // Add the new node types
+  transform: TransformNode,
+  filter: FilterNode,
+  aggregate: AggregateNode,
+  api: ApiNode,
+  database: DatabaseNode,
 };
 
 // Individual selectors prevent reference issues that cause infinite loops
@@ -76,10 +88,10 @@ export const PipelineUI = () => {
   }, []);
 
   return (
-    <div style={{ flex: 1, height: '100%', position: 'relative' }}>
+    <div className="flex-1 h-full relative">
       <div 
         ref={reactFlowWrapper} 
-        style={{ width: '100%', height: '100%', minHeight: '500px' }}
+        className="w-full h-full min-h-[500px]"
       >
         <ReactFlow
           nodes={nodes}
@@ -94,9 +106,7 @@ export const PipelineUI = () => {
           proOptions={proOptions}
           snapGrid={[gridSize, gridSize]}
           connectionLineType="smoothstep"
-          style={{
-            background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%)'
-          }}
+          className="bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f0f23]"
         >
           <Background 
             color="#374151" 
@@ -105,18 +115,12 @@ export const PipelineUI = () => {
           />
           <Controls 
             showInteractive={false}
-            style={{
-              background: 'rgba(26, 26, 46, 0.8)',
-              border: '1px solid rgba(102, 126, 234, 0.3)'
-            }}
+            className="bg-[#1a1a2e]/80 border border-[#667eea]/30"
           />
           <MiniMap 
             nodeColor="#667eea"
             maskColor="rgba(0, 0, 0, 0.2)"
-            style={{
-              background: 'rgba(26, 26, 46, 0.8)',
-              border: '1px solid rgba(102, 126, 234, 0.3)'
-            }}
+            className="bg-[#1a1a2e]/80 border border-[#667eea]/30"
           />
         </ReactFlow>
       </div>

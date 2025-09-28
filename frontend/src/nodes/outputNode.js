@@ -15,56 +15,35 @@ export const OutputNode = ({ id, data }) => {
   };
 
   return (
-    <div style={{width: 200, height: 120, border: '1px solid #f59e0b', borderRadius: '8px', background: '#1a1a2e', padding: '8px'}}>
+    <div className="w-[200px] h-[160px] border border-amber-500 rounded-lg bg-[#1a1a2e] p-2">
       <Handle
         type="target"
         position={Position.Left}
         id={`${id}-value`}
-        style={{
-          background: '#f59e0b',
-          border: '2px solid #1a1a2e'
-        }}
+        className="bg-amber-500 border-2 border-[#1a1a2e]"
       />
-      <div style={{color: 'white', fontSize: '14px', fontWeight: 'bold', marginBottom: '8px'}}>
+      <div className="text-white text-sm font-bold mb-2">
         Output
       </div>
-      <div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
+      <div className="flex flex-col gap-2">
         <div>
-          <label style={{color: 'white', fontSize: '12px'}}>
+          <label className="text-white text-xs">
             Name:
             <input 
               type="text" 
               value={currName} 
               onChange={handleNameChange}
-              style={{
-                width: '100%',
-                marginTop: '2px',
-                padding: '4px',
-                borderRadius: '4px',
-                border: '1px solid #f59e0b',
-                background: '#2a2a3e',
-                color: 'white',
-                fontSize: '12px'
-              }}
+              className="w-full mt-0.5 p-1 rounded border border-amber-500 bg-[#2a2a3e] text-white text-xs"
             />
           </label>
         </div>
         <div>
-          <label style={{color: 'white', fontSize: '12px'}}>
+          <label className="text-white text-xs">
             Type:
             <select 
               value={outputType} 
               onChange={handleTypeChange}
-              style={{
-                width: '100%',
-                marginTop: '2px',
-                padding: '4px',
-                borderRadius: '4px',
-                border: '1px solid #f59e0b',
-                background: '#2a2a3e',
-                color: 'white',
-                fontSize: '12px'
-              }}
+              className="w-full mt-0.5 p-1 rounded border border-amber-500 bg-[#2a2a3e] text-white text-xs"
             >
               <option value="Text">Text</option>
               <option value="Image">Image</option>
