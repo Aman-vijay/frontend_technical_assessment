@@ -1,4 +1,3 @@
-// ui.js
 import { useState, useRef, useCallback } from 'react';
 import ReactFlow, { Controls, Background, MiniMap } from 'reactflow';
 import { useStore } from './store';
@@ -6,7 +5,6 @@ import { InputNode } from './nodes/inputNode';
 import { LLMNode } from './nodes/llmNode';
 import { OutputNode } from './nodes/outputNode';
 import { TextNode } from './nodes/textNode';
-// Import the new nodes
 import { TransformNode } from './nodes/transformNode';
 import { FilterNode } from './nodes/filterNode';
 import { AggregateNode } from './nodes/aggregateNode';
@@ -22,7 +20,6 @@ const nodeTypes = {
   llm: LLMNode,
   customOutput: OutputNode,
   text: TextNode,
-  // Add the new node types
   transform: TransformNode,
   filter: FilterNode,
   aggregate: AggregateNode,
@@ -30,13 +27,11 @@ const nodeTypes = {
   database: DatabaseNode,
 };
 
-// Individual selectors prevent reference issues that cause infinite loops
+
 
 export const PipelineUI = () => {
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
-  
-  // Use individual selectors to avoid reference issues
   const nodes = useStore((state) => state.nodes);
   const edges = useStore((state) => state.edges);
   const getNodeID = useStore((state) => state.getNodeID);

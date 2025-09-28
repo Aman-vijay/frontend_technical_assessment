@@ -1,4 +1,3 @@
-// toolbar.js
 import { Upload, Download, Brain, Type, Globe, Database, Shuffle, ListFilter as Filter, ChartBar as BarChart3 } from 'lucide-react';
 import { DraggableNode } from './draggableNode';
 

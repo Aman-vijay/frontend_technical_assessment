@@ -1,4 +1,3 @@
-// submit.js
 import { Play } from 'lucide-react';
 import { useStore } from './store';
 
@@ -44,7 +43,7 @@ ${data.is_dag ? '✅ Your pipeline is valid!' : '❌ Your pipeline contains cycl
         className="group flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
       >
         <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
-        Run Pipeline
+       submit
       </button>
     </div>
   );
