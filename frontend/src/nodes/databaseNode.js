@@ -8,6 +8,7 @@ export const DatabaseNode = ({ id, data }) => {
   const updateNodeField = useStore((state) => state.updateNodeField);
   const [query, setQuery] = useState(data?.query || 'SELECT * FROM table');
   const [dbType, setDbType] = useState(data?.dbType || 'PostgreSQL');
+  const deleteNode = useStore((state) => state.deleteNode);
 
   const handleQueryChange = (e) => {
     const newQuery = e.target.value;
@@ -31,6 +32,7 @@ export const DatabaseNode = ({ id, data }) => {
       color="green"
       inputs={[{ id: `${id}-params` }]}
       outputs={[{ id: `${id}-result` }]}
+      onDelete={deleteNode}
     >
       {() => (
         <div className="space-y-3">

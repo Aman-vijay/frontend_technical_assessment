@@ -1,8 +1,10 @@
-// llmNode.js
 import { Brain } from 'lucide-react';
 import { BaseNode } from '../components/BaseNode';
+import { useStore } from '../store';
 
 export const LLMNode = ({ id, data }) => {
+  const deleteNode = useStore((state) => state.deleteNode);
+  
   return (
     <BaseNode
       id={id}
@@ -16,6 +18,7 @@ export const LLMNode = ({ id, data }) => {
         { id: `${id}-prompt` }
       ]}
       outputs={[{ id: `${id}-response` }]}
+      onDelete={deleteNode}
     >
       {() => (
         <div className="space-y-3">

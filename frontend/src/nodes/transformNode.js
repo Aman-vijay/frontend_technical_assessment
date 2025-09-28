@@ -1,4 +1,3 @@
-// transformNode.js - New node demonstrating abstraction
 import { useState } from 'react';
 import { Shuffle } from 'lucide-react';
 import { BaseNode } from '../components/BaseNode';
@@ -8,6 +7,7 @@ export const TransformNode = ({ id, data }) => {
   const updateNodeField = useStore((state) => state.updateNodeField);
   const [operation, setOperation] = useState(data?.operation || 'uppercase');
   const [customCode, setCustomCode] = useState(data?.customCode || '');
+  const deleteNode = useStore((state) => state.deleteNode);
 
   const handleOperationChange = (e) => {
     const newOperation = e.target.value;
@@ -31,6 +31,7 @@ export const TransformNode = ({ id, data }) => {
       color="purple"
       inputs={[{ id: `${id}-input` }]}
       outputs={[{ id: `${id}-output` }]}
+      onDelete={deleteNode}
     >
       {() => (
         <div className="space-y-3">

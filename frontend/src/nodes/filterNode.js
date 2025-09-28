@@ -1,4 +1,3 @@
-// filterNode.js - New node demonstrating abstraction
 import { useState } from 'react';
 import { ListFilter as Filter } from 'lucide-react';
 import { BaseNode } from '../components/BaseNode';
@@ -8,6 +7,7 @@ export const FilterNode = ({ id, data }) => {
   const updateNodeField = useStore((state) => state.updateNodeField);
   const [condition, setCondition] = useState(data?.condition || 'contains');
   const [value, setValue] = useState(data?.value || '');
+  const deleteNode = useStore((state) => state.deleteNode);
 
   const handleConditionChange = (e) => {
     const newCondition = e.target.value;
@@ -34,6 +34,7 @@ export const FilterNode = ({ id, data }) => {
         { id: `${id}-passed` },
         { id: `${id}-filtered` }
       ]}
+      onDelete={deleteNode}
     >
       {() => (
         <div className="space-y-3">

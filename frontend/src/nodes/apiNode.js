@@ -1,4 +1,3 @@
-// apiNode.js - New node demonstrating abstraction
 import { useState } from 'react';
 import { Globe } from 'lucide-react';
 import { BaseNode } from '../components/BaseNode';
@@ -8,6 +7,7 @@ export const ApiNode = ({ id, data }) => {
   const updateNodeField = useStore((state) => state.updateNodeField);
   const [url, setUrl] = useState(data?.url || 'https://api.example.com');
   const [method, setMethod] = useState(data?.method || 'GET');
+    const deleteNode = useStore((state) => state.deleteNode);
 
   const handleUrlChange = (e) => {
     const newUrl = e.target.value;
@@ -31,6 +31,7 @@ export const ApiNode = ({ id, data }) => {
       color="teal"
       inputs={[{ id: `${id}-data` }]}
       outputs={[{ id: `${id}-response` }]}
+      onDelete={deleteNode}
     >
       {() => (
         <div className="space-y-3">

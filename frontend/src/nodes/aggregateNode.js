@@ -1,4 +1,3 @@
-// aggregateNode.js - New node demonstrating abstraction
 import { useState } from 'react';
 import { ChartBar as BarChart3 } from 'lucide-react';
 import { BaseNode } from '../components/BaseNode';
@@ -6,6 +5,7 @@ import { useStore } from '../store';
 
 export const AggregateNode = ({ id, data }) => {
   const updateNodeField = useStore((state) => state.updateNodeField);
+  const deleteNode = useStore((state) => state.deleteNode);
   const [operation, setOperation] = useState(data?.operation || 'sum');
   const [groupBy, setGroupBy] = useState(data?.groupBy || '');
 
@@ -31,6 +31,7 @@ export const AggregateNode = ({ id, data }) => {
       color="teal"
       inputs={[{ id: `${id}-data` }]}
       outputs={[{ id: `${id}-result` }]}
+      onDelete={deleteNode}
     >
       {() => (
         <div className="space-y-3">
