@@ -1,35 +1,31 @@
 // llmNode.js
-import { Handle, Position } from 'reactflow';
+import { Brain } from 'lucide-react';
+import { BaseNode } from '../components/BaseNode';
 
 export const LLMNode = ({ id, data }) => {
   return (
-    <div className="w-[200px] h-[100px] border border-violet-500 rounded-lg bg-[#1a1a2e] p-2">
-      <Handle
-        type="target"
-        position={Position.Left}
-        id={`${id}-system`}
-        className="top-[33%] bg-violet-500 border-2 border-[#1a1a2e]"
-      />
-      <Handle
-        type="target"
-        position={Position.Left}
-        id={`${id}-prompt`}
-        className="top-[67%] bg-violet-500 border-2 border-[#1a1a2e]"
-      />
-      <div className="text-white text-sm font-bold mb-2 text-center">
-        LLM
-      </div>
-      <div className="text-center">
-        <div className="text-white text-[11px] opacity-70">
-          AI Language Model
+    <BaseNode
+      id={id}
+      data={data}
+      title="LLM"
+      description="AI Language Model"
+      icon={Brain}
+      color="purple"
+      inputs={[
+        { id: `${id}-system` },
+        { id: `${id}-prompt` }
+      ]}
+      outputs={[{ id: `${id}-response` }]}
+    >
+      {() => (
+        <div className="space-y-3">
+          <div className="text-center">
+            <div className="text-xs text-white/70">
+              Connect system message and prompt inputs to generate AI responses
+            </div>
+          </div>
         </div>
-      </div>
-      <Handle
-        type="source"
-        position={Position.Right}
-        id={`${id}-response`}
-        className="bg-violet-500 border-2 border-[#1a1a2e]"
-      />
-    </div>
+      )}
+    </BaseNode>
   );
 };
